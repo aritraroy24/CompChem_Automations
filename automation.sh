@@ -17,9 +17,11 @@ for f in $(find . -name "*.gjf"); do
                         delH=$(echo $delH_String | tr -cd '[:digit:].-')
                         delG_String=$(grep "Thermal correction to Gibbs Free Energy" $filename.log)
                         delG=$(echo $delG_String | tr -cd '[:digit:].-')
+                        last_Energy_line=$(grep -n "SCF Done" $filename.log | tail -1)
+                        Last_Energy=$(echo $last_Energy_line | grep -oE "\-?[0-9]+(\.[0-9]+)?" | sed -n '2p')
                         touch $filename"_result.txt"
-                        printf "\n\n========== RESULTS ==========\nZPE Correction = ${ZPE}\nEnthalpy Correction = ${delH}\nGibbs Correction = ${delG}\n\n"
-                        printf "========== RESULTS ==========\nZPE Correction = ${ZPE}\nEnthalpy Correction = ${delH}\nGibbs Correction = ${delG}" >> $filename"_result.txt"
+                        printf "\n\n========== RESULTS ==========\nZPE Correction = ${ZPE}\nEnthalpy Correction = ${delH}\nGibbs Correction = ${delG}\nSCF Energy = ${Last_Energy}\n\n"
+                        printf "========== RESULTS ==========\nZPE Correction = ${ZPE}\nEnthalpy Correction = ${delH}\nGibbs Correction = ${delG}\n\nSCF Energy = ${Last_Energy}" >> $filename"_result.txt"
                         last_string_line=$(grep -n "Standard orientation:" $filename.log | tail -1)
                         line_number=$(echo $last_string_line | cut -d':' -f1)
                         start_line_number=$((line_number+5))
