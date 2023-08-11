@@ -5,10 +5,13 @@ Do While True
     currentMinute = Minute(Now)
     currentSecond = Second(Now)
     
-    If currentHour >= 0 And currentHour <= 6 Then
-        currentCPUUsage = GetCPUUsage()
-        
-        If currentCPUUsage < 10 Then
+    If currentHour >= 1 And currentHour <= 5 Then
+        firstCPUUsage = GetCPUUsage()
+        ' Pause for 20 second before getting CPU usage data for 2nd time
+        WScript.Sleep 20000
+        secondCPUUsage = GetCPUUsage()
+
+        If firstCPUUsage < 10 And secondCPUUsage < 10 Then
             ' Pause for 100 second before shutting down
             WScript.Sleep 100000
             ShutdownComputer()

@@ -1,0 +1,12 @@
+%nprocshared=12
+%mem=10gb
+#p b3lyp/6-311g++**
+#p b3lyp/gen
+single point energy calculation of ethane at b3lyp/6-311g++** level
+single point energy calculation of ethane at b3lyp/gen level
+C H N O Cl 0
+Def2SVP
+****
+Cu 0
+Def2TZVP
+****
